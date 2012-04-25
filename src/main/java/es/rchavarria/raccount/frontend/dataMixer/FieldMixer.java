@@ -6,7 +6,7 @@ public interface FieldMixer<T> {
      * Copia parcialmente campos de {@code origin} a {@code target}
      * 
      * @param target
-     *            Elemento que retornar· con algunos campos copiados de {@code origin}
+     *            Elemento que retornar√° con algunos campos copiados de {@code origin}
      * @param origin
      *            Elemento del que copiar ciertos campos
      * @return El argumento {@code target} modificado

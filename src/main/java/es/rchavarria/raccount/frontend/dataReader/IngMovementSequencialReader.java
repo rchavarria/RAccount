@@ -28,13 +28,13 @@ public class IngMovementSequencialReader implements SequencialReader<DoubleMovem
     	isr = new InputStreamReader(is);
         reader = new BufferedReader(isr);
         sdf = new SimpleDateFormat("dd-MM-yyyy");
-        nf = NumberFormat.getNumberInstance(new Locale("es"));//se importara con los numeros en formato español
+        nf = NumberFormat.getNumberInstance(new Locale("es"));//se importara con los numeros en formato espaÃ±ol
     }
 
     /**
      * Formato del fichero que se parsea:
      * fecha     ;fecha     ; descripcion                         ; cantidad	; saldo final
-     * 17-08-2010;17-08-2010;Traspaso periódico recibido nómina (SPO FROM 2095782872);28,00;2.201,71
+     * 17-08-2010;17-08-2010;Traspaso periÃ³dico recibido nÃ³mina (SPO FROM 2095782872);28,00;2.201,71
 	 * 17-08-2010;17-08-2010;Pago HIPER USERA T73 PIOZ ES;-10,42;2.191,29
 	 * 18-08-2010;18-08-2010;Recibo CITILIFE FINANCIAL LIMITED;-26,75;2.164,54
 	 * 

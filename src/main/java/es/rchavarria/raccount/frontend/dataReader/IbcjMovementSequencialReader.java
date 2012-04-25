@@ -29,7 +29,7 @@ public class IbcjMovementSequencialReader implements SequencialReader<DoubleMove
     	isr = new InputStreamReader(is);
         reader = new BufferedReader(isr);
         sdf = new SimpleDateFormat("dd/MM/yy");
-        nf = NumberFormat.getNumberInstance(new Locale("es"));//se importara con los numeros en formato español
+        nf = NumberFormat.getNumberInstance(new Locale("es"));//se importara con los numeros en formato espaÃ±ol
     }
 
     /**

@@ -13,7 +13,7 @@ import es.rchavarria.raccount.model.DoubleMovement;
 
 /**
  * Parsea/Importa secuencialmente movimientos de Caja Mandril. El documento de texto desde el que importar se consigue a
- * través de la web: -> Descargar movimientos > Texto Cada vez que se le pide, va proporcionando un nuevo Movement
+ * travÃ©s de la web: -> Descargar movimientos > Texto Cada vez que se le pide, va proporcionando un nuevo Movement
  * incompleto
  * 
  * @author RChavarria
@@ -29,12 +29,12 @@ public class CjMdMovementSequencialReader implements SequencialReader<DoubleMove
         isr = new InputStreamReader(is);
         reader = new BufferedReader(isr);
         sdf = new SimpleDateFormat("dd/MM/yyyy");
-        nf = NumberFormat.getNumberInstance(new Locale("es"));// se importara con los numeros en formato español
+        nf = NumberFormat.getNumberInstance(new Locale("es"));// se importara con los numeros en formato espaÃ±ol
     }
 
     /**
      * Formato del fichero que se parsea:
-     * "Fecha","Fecha valor","Descripción","Importe","Divisa","Saldo posterior","Divisa"
+     * "Fecha","Fecha valor","DescripciÃ³n","Importe","Divisa","Saldo posterior","Divisa"
      * ,"Concepto 1","Concepto 2","Concepto 3","Concepto 4","Concepto 5","Concepto 6"
      * "15/07/2010","15/07/2010","PAGO EN EFECTIVO"
      * ,"-4.500,00","EUR","320,60","EUR","2875","Monica Lopez Salido","MONICA LOPEZ SALIDO"

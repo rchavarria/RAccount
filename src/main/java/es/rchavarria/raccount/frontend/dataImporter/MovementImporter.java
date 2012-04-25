@@ -20,12 +20,12 @@ import es.rchavarria.raccount.model.Movement;
  * Importa un fichero con el siguiente formato a objetos Concept:
  * 
  * idMovimiento;Fecha;Cantidad;Concepto;Notas;Cuenta;Saldo_En_Cuenta
- * 5403;06/08/2010;-4,95000 €;2;comida ikea;1;16.197,34 €
- * 5402;06/08/2010;-4,95000 €;2;comida ikea;3;3.831,39 €
- * 5401;06/08/2010;2000,000 €;46;ingreso sobrante banquete;1;16.202,29 €
- * 5400;06/08/2010;2000,000 €;46;ingreso sobrante banquete;3;3.836,34 €
- * 5399;30/07/2010;1052,03000 €;25;nomina monica julio 2010;1;14.202,29 €
- * 5398;30/07/2010;1052,03000 €;25;nomina monica julio 2010;3;1.836,34 €
+ * 5403;06/08/2010;-4,95000 â‚¬;2;comida ikea;1;16.197,34 â‚¬
+ * 5402;06/08/2010;-4,95000 â‚¬;2;comida ikea;3;3.831,39 â‚¬
+ * 5401;06/08/2010;2000,000 â‚¬;46;ingreso sobrante banquete;1;16.202,29 â‚¬
+ * 5400;06/08/2010;2000,000 â‚¬;46;ingreso sobrante banquete;3;3.836,34 â‚¬
+ * 5399;30/07/2010;1052,03000 â‚¬;25;nomina monica julio 2010;1;14.202,29 â‚¬
+ * 5398;30/07/2010;1052,03000 â‚¬;25;nomina monica julio 2010;3;1.836,34 â‚¬
  *
  * @author rchavarria
  */

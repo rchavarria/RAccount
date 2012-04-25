@@ -13,9 +13,9 @@ import es.rchavarria.raccount.model.Account;
  * Importa un fichero a objetos Account con la siguiente estructura:
  * 
  * idCuenta;Cuenta;Saldo;Saldo_Contabilizable
- * 1;Cta Saldo Total;16.197,34 €;VERDADERO
- * 2;Ibercaja Monica/Ruben/Arturo/Cesar;0,33 €;FALSO
- * 2;INg de todos;-0,33 €;FALSO;codigo de la cuenta (opcional)
+ * 1;Cta Saldo Total;16.197,34 â‚¬;VERDADERO
+ * 2;Ibercaja Monica/Ruben/Arturo/Cesar;0,33 â‚¬;FALSO
+ * 2;INg de todos;-0,33 â‚¬;FALSO;codigo de la cuenta (opcional)
  * [ . . . ]
  * 
  * @author rchavarria

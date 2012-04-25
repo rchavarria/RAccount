@@ -11,7 +11,7 @@ public interface DialogableController<T> extends GuiController {
 	/**
 	 * @return <code>true</code> si todos los valores del panel estan correctos
 	 * 
-	 *         TODO ¿Debería lanzar una excepción en lugar de retornar true/false?
+	 *         TODO DeberÃ­a lanzar una excepciÃ³n en lugar de retornar true/false?
 	 */
 	public boolean areValuesOK();
 }

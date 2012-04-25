@@ -11,7 +11,7 @@ import es.rchavarria.raccount.frontend.gui.controller.DialogableController;
 import es.rchavarria.raccount.model.DoubleMovement;
 
 /**
- * Permite seleccionar un archivo desde donde importar los movimientos así como un <code>ISequencialReader</code> que
+ * Permite seleccionar un archivo desde donde importar los movimientos asÃ­ como un <code>ISequencialReader</code> que
  * entiende el formato del fichero seleccionado
  * 
  * @author RChavarria

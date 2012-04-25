@@ -44,7 +44,7 @@ public class ListLastNMovementsView extends JPanel implements GuiView {
         cmbAccounts.setRenderer(new AccountJListRenderer());
         pnConfiguration.add(cmbAccounts);
 
-        pnConfiguration.add(new JLabel("Movements nº:"));
+        pnConfiguration.add(new JLabel("Movements nÂº:"));
         txtNMovements = new JTextField(10);
         pnConfiguration.add(txtNMovements);
 

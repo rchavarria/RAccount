@@ -35,7 +35,7 @@ public class BtnListNMovementsAction implements ActionListener {
 		try {
 			movs = new ServiceFacade().listLastNMovements(account, nMovements);
 		} catch (Exception e1) {
-			// TODO mejorar esta gestión de excepcion
+			// TODO mejorar esta gestion de excepcion
 			e1.printStackTrace();
 			movs = Collections.emptyList();
 		}
