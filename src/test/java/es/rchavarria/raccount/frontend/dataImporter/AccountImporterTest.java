@@ -28,15 +28,6 @@ public class AccountImporterTest {
     }
 
     @Test
-    public void testCurrencyNumbers() throws Exception {
-        NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
-        
-        assertEquals(7.2, cf.parse("7,2 €").doubleValue(), 0.1);
-        assertEquals(7.2, cf.parse("7,20 €").doubleValue(), 0.1);
-        assertEquals(7, cf.parse("7 €").doubleValue(), 0.1);
-    }
-    
-    @Test
     public void testDoImport() throws Exception {
         // ver el fichero para comprender los Assert
         AccountImporter ai = new AccountImporter(getClass().getResourceAsStream("/datatest/accounts.csv"));

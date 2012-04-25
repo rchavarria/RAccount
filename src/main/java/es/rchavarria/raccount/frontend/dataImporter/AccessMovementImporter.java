@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import es.rchavarria.raccount.bussines.BussinessException;
 import es.rchavarria.raccount.bussines.ServiceFacade;
@@ -33,10 +34,12 @@ public class AccessMovementImporter {
 
 	private String file;
 	private SimpleDateFormat sdf;
+    private NumberFormat nf;
 
 	public AccessMovementImporter(final String file) {
 		this.file = file;
-		this.sdf = new SimpleDateFormat("dd/MM/yyyy");
+		sdf = new SimpleDateFormat("dd/MM/yyyy");
+		nf = NumberFormat.getInstance(new Locale("es", "ES"));
 	}
 
 	public List<Movement> doImport() throws ImportException {
@@ -52,20 +55,29 @@ public class AccessMovementImporter {
 
 			String line = br.readLine(); // primera fila == cabecera
 			while ((line = br.readLine()) != null) {
+			    System.out.println("gonna parsing: '" + line + "'");
 				String[] tokens = line.split(";");
+				
 				Movement m = new Movement();
-				m.setMovementDate(this.sdf.parse(tokens[1]));
-				Double dblValue = NumberFormat.getCurrencyInstance().parse(tokens[2]).doubleValue();
+				m.setMovementDate(sdf.parse(tokens[1]));
+				
+				String numberStr = tokens[2].substring(0, tokens[2].indexOf(" "));
+				Double dblValue = nf.parse(numberStr).doubleValue();
 				m.setAmount(dblValue);
-				Long lgValue = NumberFormat.getInstance().parse(tokens[3]).longValue();
+				
+				Long lgValue = nf.parse(tokens[3]).longValue();
 				Concept conc = new ServiceFacade().findConcept(Translator.translateConcept(lgValue));
 				m.setConcept(conc);
+				
 				m.setDescription(tokens[4]);
-				lgValue = NumberFormat.getInstance().parse(tokens[5]).longValue();
+				
+				lgValue = nf.parse(tokens[5]).longValue();
 				Account a = new ServiceFacade().findAccount(Translator.translateAccount(lgValue));
 				m.setAccount(a);
+				
 				if (tokens.length > 6) {
-					dblValue = NumberFormat.getCurrencyInstance().parse(tokens[6]).doubleValue();
+				    numberStr = tokens[6].substring(0, tokens[6].indexOf(" "));
+					dblValue = nf.parse(numberStr).doubleValue();
 					m.setFinalBalance(dblValue);
 				}
 
@@ -75,15 +87,19 @@ public class AccessMovementImporter {
 		} catch (SQLException e) {
 			String msg = "Error accesing to the database";
 			throw new ImportException(msg, e);
+			
 		} catch (FileNotFoundException e) {
 			String msg = "File not found: " + this.file;
 			throw new ImportException(msg, e);
+			
 		} catch (ParseException e) {
 			String msg = "Error parsing data";
 			throw new ImportException(msg, e);
+			
 		} catch (IOException e) {
 			String msg = "Error reading file: " + this.file;
 			throw new ImportException(msg, e);
+			
 		} catch (BussinessException e) {
 			String msg = "Error retrieving data from de database";
 			throw new ImportException(msg, e);

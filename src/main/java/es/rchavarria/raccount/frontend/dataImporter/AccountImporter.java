@@ -30,7 +30,7 @@ public class AccountImporter {
     
     public AccountImporter(InputStream is){
         this.is = is;
-        nf = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
+        nf = NumberFormat.getInstance(new Locale("es", "ES"));
     }
 
     public List<Account> doImport() throws ImportException{
@@ -47,7 +47,9 @@ public class AccountImporter {
                 String[] tokens = line.split(";");
                 Account a = new Account();
                 a.setName(tokens[1]);
-                Double dblValue = nf.parse(tokens[2]).doubleValue();
+                
+                String numberStr = tokens[2].substring(0, tokens[2].indexOf(" "));
+                Double dblValue = nf.parse(numberStr).doubleValue();
                 a.setBalance(dblValue);
                 a.setAccountable("VERDADERO".equals(tokens[3]) ? true : false);
                 if(tokens.length > 4)
@@ -55,7 +57,6 @@ public class AccountImporter {
                 
                 accounts.add(a);
             }
-            
             
         } catch (IOException e) {
             throw new ImportException("Error reading file: " + is, e);
