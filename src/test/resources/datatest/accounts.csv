@@ -1,0 +1,6 @@
+idCuenta;Cuenta;Saldo;Saldo_Contabilizable
+1;Cuenta Test 1;7,34 €;VERDADERO;mi codigo cuenta
+2;Cuenta Test 2;-0,33 €;VERDADERO
+3;Cta Tst 3;3.831,39 €;VERDADERO;mi codigo cuenta
+4;Cta Test 4;2.273,71 €;FALSO;mi codigo cuenta
+5;Cta Test 5;-51 €;FALSO
