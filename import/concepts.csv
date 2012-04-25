@@ -1,0 +1,35 @@
+idConcept;name;visible
+-1;abono piscina;FALSO
+-1;abono.renfe;VERDADERO
+-1;boda;VERDADERO
+-1;cajero;VERDADERO
+-1;casa.alquiler;FALSO
+-1;casa.cuota pioz;FALSO
+-1;casa.gas;FALSO
+-1;casa.gasoil;VERDADERO
+-1;casa.hipoteca;VERDADERO
+-1;casa.luz;VERDADERO
+-1;casa.otros;VERDADERO
+-1;casa.reparaciones;VERDADERO
+-1;coche.compra;VERDADERO
+-1;coche.gasolina;VERDADERO
+-1;coche.otros;VERDADERO
+-1;coche.talleres;VERDADERO
+-1;compras.autoregalos;VERDADERO
+-1;compras.casa;VERDADERO
+-1;compras.regalos;VERDADERO
+-1;compras.ropa;VERDADERO
+-1;compras.super;VERDADERO
+-1;Gastos de viaje;FALSO
+-1;nominas;VERDADERO
+-1;OTROS;VERDADERO
+-1;rentabilidades;VERDADERO
+-1;Seguros (vida, coche, casa, …);FALSO
+-1;seguros.casa;VERDADERO
+-1;seguros.coche;VERDADERO
+-1;seguros.dental;VERDADERO
+-1;seguros.otros;VERDADERO
+-1;seguros.vida;VERDADERO
+-1;telefonos.internet;VERDADERO
+-1;telefonos.movil;VERDADERO
+-1;Traspasos;FALSO

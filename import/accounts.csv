@@ -1,0 +1,19 @@
+idCuenta;Cuenta;Saldo;Saldo_Contabilizable;Codigo_Cuenta
+-1;Cta Saldo Total;17.110,94 €;VERDADERO;null
+-1;Ibercaja Monica/Ruben/Arturo/Cesar;0,33 €;VERDADERO;null
+-1;Cajamadrid Ruben/Monica;3.358,46 €;VERDADERO;ES74 2038 2875 3830 0631 2725
+-1;ING Cta Nomina;272,39 €;VERDADERO;1701846410
+-1;ING Cta Naranja Monica;4.111,22 €;VERDADERO;2095782872
+-1;ING Cta Naranja Ruben;4.262,45 €;VERDADERO;2095783462
+-1;Ibercaja Ruben;2.480,52 €;VERDADERO;null
+-1;Cajamadrid Monica;0,00 €;FALSO;null
+-1;ING Cuenta Vivienda Ruben;0,00 €;FALSO;null
+-1;Depositos en ING;0,00 €;VERDADERO;null
+-1;Fondo IBEX 35 en ING;1.350,00 €;VERDADERO;40010406365 // 
+-1;Imp.Cero (Imprevistos) ruben;0,83 €;VERDADERO;2700379566
+-1;Imp.Cero (Vacaciones) ruben y monica;1.100,58 €;VERDADERO;2700436305
+-1;Imp.Cero (Reformas) ruben y monica;3,34 €;VERDADERO;2700618547
+-1;Imp.Cero (Formacion) ruben y monica;4,90 €;VERDADERO;2700618552
+-1;Imp.Cero (Comprar casa) ruben y monica;9,84 €;VERDADERO;2700689678
+-1;Fondo pensiones Monica ING;50,00 €;VERDADERO;410118885915
+-1;Fondo pensiones Ruben ING;50,00 €;VERDADERO;410118884315
