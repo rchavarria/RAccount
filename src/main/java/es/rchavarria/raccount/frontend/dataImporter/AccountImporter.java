@@ -1,11 +1,14 @@
 package es.rchavarria.raccount.frontend.dataImporter;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import es.rchavarria.raccount.model.Account;
 
@@ -21,10 +24,13 @@ import es.rchavarria.raccount.model.Account;
  * @author rchavarria
  */
 public class AccountImporter {
+    
     private InputStream is;
+    private NumberFormat nf;
     
     public AccountImporter(InputStream is){
         this.is = is;
+        nf = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
     }
 
     public List<Account> doImport() throws ImportException{
@@ -41,7 +47,7 @@ public class AccountImporter {
                 String[] tokens = line.split(";");
                 Account a = new Account();
                 a.setName(tokens[1]);
-                Double dblValue = NumberFormat.getCurrencyInstance().parse(tokens[2]).doubleValue();
+                Double dblValue = nf.parse(tokens[2]).doubleValue();
                 a.setBalance(dblValue);
                 a.setAccountable("VERDADERO".equals(tokens[3]) ? true : false);
                 if(tokens.length > 4)
@@ -51,9 +57,12 @@ public class AccountImporter {
             }
             
             
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new ImportException("Error reading file: " + is, e);
 
+        } catch (ParseException e) {
+            throw new ImportException("Error parsing contents of file: " + is, e);
+            
         } finally {
             if(br != null){
                 try { br.close(); } 

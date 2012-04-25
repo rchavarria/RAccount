@@ -1,6 +1,10 @@
 package es.rchavarria.raccount.frontend.dataImporter;
 
+import static org.junit.Assert.assertEquals;
+
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import junit.framework.Assert;
 
@@ -23,6 +27,15 @@ public class AccountImporterTest {
     public void tearDown() throws Exception {
     }
 
+    @Test
+    public void testCurrencyNumbers() throws Exception {
+        NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
+        
+        assertEquals(7.2, cf.parse("7,2 €").doubleValue(), 0.1);
+        assertEquals(7.2, cf.parse("7,20 €").doubleValue(), 0.1);
+        assertEquals(7, cf.parse("7 €").doubleValue(), 0.1);
+    }
+    
     @Test
     public void testDoImport() throws Exception {
         // ver el fichero para comprender los Assert
