@@ -2,7 +2,9 @@ package es.rchavarria.raccount.bussines;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.rchavarria.raccount.db.Session;
 import es.rchavarria.raccount.db.dao.AccountDAO;
@@ -178,5 +180,18 @@ public class ServiceFacade {
                 session.close();
             }
         }
+    }
+
+    public Map<Concept, Double> getMonthTotalExpenses(int month) throws DAOException, SQLException, IOException {
+        Map<Concept, Double> expenses = new HashMap<Concept, Double>();
+        List<Concept> concepts = getVisibleConceptList();
+        System.out.println("Hay " + concepts.size() + " concetos");
+        
+        Double d = 1d;
+        for(Concept c : concepts){
+            expenses.put(c, d);
+            d += 1.5d;
+        }
+        return expenses;
     }
 }
