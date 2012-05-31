@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
+import es.rchavarria.raccount.bussines.BussinessException;
 import es.rchavarria.raccount.bussines.ServiceFacade;
 import es.rchavarria.raccount.db.dao.DAOException;
 import es.rchavarria.raccount.model.Concept;
@@ -23,7 +24,7 @@ public class TotalExpensesReporter {
 		br = new BufferedReader(isr);
 	}
 	
-	public void startReporting() throws DAOException, SQLException, IOException {
+	public void startReporting() throws BussinessException, DAOException, SQLException, IOException {
 		System.out.println("Select a month (1 to 12): ");
 		String strMonth = br.readLine();
         int month = new GregorianCalendar().get(Calendar.MONTH);

@@ -1,7 +1,10 @@
 package es.rchavarria.raccount.bussines;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import es.rchavarria.raccount.bussines.util.ConceptUtils;
@@ -10,6 +13,7 @@ import es.rchavarria.raccount.db.dao.AccountDAO;
 import es.rchavarria.raccount.db.dao.DAOException;
 import es.rchavarria.raccount.db.dao.MovementDAO;
 import es.rchavarria.raccount.model.Account;
+import es.rchavarria.raccount.model.Concept;
 import es.rchavarria.raccount.model.DoubleMovement;
 import es.rchavarria.raccount.model.Movement;
 
@@ -186,4 +190,42 @@ public class MovementBussiness {
 			throw new BussinessException(msg, e);
 		}
 	}
+
+	/**
+	 * 
+	 * @param month
+	 *         mes del año para el que se quiere calcular los gastos (1=enero, 12=diciembre)
+	 * @param account
+	 *         cuenta para la que se calculan los gastos
+	 * @param concept
+	 *         concepto para el que se calculan los gastos
+	 * @return
+	 *         total de los gastos para una cuenta, concepto y mes dados.
+	 *         
+	 * @throws BussinessException
+	 */
+    public double getMonthExpenses(int month, Account account, Concept concept) throws BussinessException {
+        try {
+            MovementDAO dao = new MovementDAO(session);
+            Calendar cal = new GregorianCalendar();
+            
+            // primer día del mes
+            cal.set(cal.get(Calendar.YEAR), month - 1, 1, 0, 0, 0);
+            Date start = cal.getTime();
+            
+            // ultimo día del mes
+            cal.set(cal.get(Calendar.YEAR), month, 1, 23, 59, 59);
+            cal.add(Calendar.DAY_OF_MONTH, -1);
+            Date end = cal.getTime();
+            
+            return dao.getExpenses(account, concept, start, end);
+            
+        } catch (DAOException e) {
+            String msg = "Error calculating expenses for " +
+            		     "account '" + account.getName() + "', " +
+            		     "concept '" + concept.getName() + "' " +
+            		     "during month '#" + month + "'";
+            throw new BussinessException(msg, e);
+        }
+    }
 }

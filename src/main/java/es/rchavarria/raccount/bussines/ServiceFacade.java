@@ -182,9 +182,24 @@ public class ServiceFacade {
         }
     }
 
-    public Map<Concept, Double> getMonthTotalExpenses(int month) throws DAOException, SQLException, IOException {
+    public Map<Concept, Double> getMonthTotalExpenses(int month) throws BussinessException, DAOException, SQLException, IOException {
         Map<Concept, Double> expenses = new HashMap<Concept, Double>();
         List<Concept> concepts = getVisibleConceptList();
+        Account account = findAccount(1L);
+
+        Session session = null;
+        try {
+            session = TransactionalDBSession.getSession();
+            MovementBussiness mb = new MovementBussiness(session);
+            for(Concept concept : concepts){
+                double expense = mb.getMonthExpenses(month, account, concept);
+                expenses.put(concept, expense);
+            }
+
+        } finally {
+            if (session != null) { session.close(); }
+        }
+        
         System.out.println("Hay " + concepts.size() + " concetos");
         
         Double d = 1d;

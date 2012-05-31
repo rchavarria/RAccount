@@ -4,10 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import es.rchavarria.raccount.db.Session;
 import es.rchavarria.raccount.model.Account;
+import es.rchavarria.raccount.model.Concept;
 import es.rchavarria.raccount.model.Movement;
 
 public class MovementDAO {
@@ -233,5 +235,10 @@ public class MovementDAO {
         }
 
         return all;
+    }
+
+    public double getExpenses(Account account, Concept concept, Date start, Date end) 
+            throws DAOException {
+        return 0;
     }
 }
