@@ -156,4 +156,36 @@ public class MovementDAOTest {
         
         assertEquals(0.0d, expense, 0.1d);
     }
+    
+    @Test
+    public void testGetExpensesOneMovement() throws DAOException {
+        // data for this test
+        double amount = 3.4d;
+        Concept concept = new ConceptDAO(session).find(1L);
+        Account account = new AccountDAO(session).find(1L);
+        Movement m = new Movement();
+        m.setDescription("TEST description");
+        m.setAmount(amount);
+        m.setFinalBalance(55d);
+        m.setMovementDate(new Date());
+        m.setAccount(account);
+        m.setConcept(concept);
+
+        // insert movement
+        MovementDAO dao = new MovementDAO(session);
+        long id = dao.insert(m);
+        m.setIdMovement(id);
+        
+        // get expenses of this month
+        int month = new GregorianCalendar().get(Calendar.MONTH) + 1;
+        Date start = DateUtils.getFirstDayOfMonth(month);
+        Date end = DateUtils.getLastDayOfMonth(month);
+        double expenses = dao.getExpenses(account, concept, start, end);
+        
+        // clean up
+        dao.delete(m);
+        
+        // asserts
+        assertEquals(amount, expenses, 0.1d);
+    }
 }
