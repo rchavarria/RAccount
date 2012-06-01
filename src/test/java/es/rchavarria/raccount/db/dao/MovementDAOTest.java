@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -14,11 +16,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.rchavarria.raccount.bussines.util.DateUtils;
 import es.rchavarria.raccount.db.Session;
 import es.rchavarria.raccount.db.dao.populators.MovementPopulator;
 import es.rchavarria.raccount.db.isession.DBSession;
 import es.rchavarria.raccount.db.isession.DataBaseTests;
 import es.rchavarria.raccount.model.Account;
+import es.rchavarria.raccount.model.Concept;
 import es.rchavarria.raccount.model.Movement;
 
 public class MovementDAOTest {
@@ -137,5 +141,19 @@ public class MovementDAOTest {
         m.setAccount(new AccountDAO(session).listAll().get(0));
         m.setConcept(new ConceptDAO(session).listAll().get(0));
         return m;
+    }
+    
+    @Test
+    public void testGetExpensesEqualsZero() throws DAOException {
+        Account account = new AccountDAO(session).find(1L);
+        Concept concept = new ConceptDAO(session).find(1L);
+        int month = new GregorianCalendar().get(Calendar.MONTH) + 1;
+        Date start = DateUtils.getFirstDayOfMonth(month);
+        Date end = DateUtils.getLastDayOfMonth(month);
+        
+        MovementDAO dao = new MovementDAO(session);
+        double expense = dao.getExpenses(account, concept, start, end);
+        
+        assertEquals(0.0d, expense, 0.1d);
     }
 }

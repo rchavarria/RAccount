@@ -1,13 +1,12 @@
 package es.rchavarria.raccount.bussines;
 
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import es.rchavarria.raccount.bussines.util.ConceptUtils;
+import es.rchavarria.raccount.bussines.util.DateUtils;
 import es.rchavarria.raccount.db.Session;
 import es.rchavarria.raccount.db.dao.AccountDAO;
 import es.rchavarria.raccount.db.dao.DAOException;
@@ -207,16 +206,8 @@ public class MovementBussiness {
     public double getMonthExpenses(int month, Account account, Concept concept) throws BussinessException {
         try {
             MovementDAO dao = new MovementDAO(session);
-            Calendar cal = new GregorianCalendar();
-            
-            // primer día del mes
-            cal.set(cal.get(Calendar.YEAR), month - 1, 1, 0, 0, 0);
-            Date start = cal.getTime();
-            
-            // ultimo día del mes
-            cal.set(cal.get(Calendar.YEAR), month, 1, 23, 59, 59);
-            cal.add(Calendar.DAY_OF_MONTH, -1);
-            Date end = cal.getTime();
+            Date start = DateUtils.getFirstDayOfMonth(month);
+            Date end = DateUtils.getLastDayOfMonth(month);
             
             return dao.getExpenses(account, concept, start, end);
             
