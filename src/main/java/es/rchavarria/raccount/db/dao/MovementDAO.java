@@ -2,6 +2,7 @@ package es.rchavarria.raccount.db.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -222,8 +223,8 @@ public class MovementDAO {
         try {
             rs = session.sqlFind(sql);
             while (rs.next()) {
-                Movement concept = fill(rs);
-                all.add(concept);
+                Movement movement = fill(rs);
+                all.add(movement);
             }
 
         } catch (SQLException e) {
@@ -239,6 +240,44 @@ public class MovementDAO {
 
     public double getExpenses(Account account, Concept concept, Date start, Date end) 
             throws DAOException {
-        return 0;
+
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String sql = "SELECT * FROM Movement" + " WHERE " 
+                     + Movement.ID_ACCOUNT + "=" + account.getIdAccount() + " AND "
+                     + Movement.ID_CONCEPT + "=" + concept.getIdConcept() + " AND "
+                     + Movement.MOVEMENT_DATE + ">='" + sdf.format(start) + "' AND "
+                     + Movement.MOVEMENT_DATE + "<='" + sdf.format(end) + "' "
+                     + "ORDER BY " + Movement.MOVEMENT_DATE + " DESC";
+        
+        ResultSet rs = null;
+        try {
+            List<Movement> movements = new ArrayList<Movement>();
+            rs = session.sqlFind(sql);
+            while (rs.next()) {
+                Movement movement = fill(rs);
+                movements.add(movement);
+            }
+            
+            return sumAmounts(movements);
+            
+        } catch (SQLException e) {
+            String msg = "Error movements for account '" + account.getName()  +"', " +
+            		     "concept '" + concept.getName() +"', " +
+            		     "starting at '" + sdf.format(start) + "', " +
+            		     "ending at '" + sdf.format(end) + "',\n" +
+            		     "with SQL '" + sql + "'";
+            throw new DAOException(msg, e);
+
+        } finally {
+            closeResultSet(rs);
+        }
+    }
+
+    private double sumAmounts(List<Movement> movements) {
+        double total = 0d;
+        for(Movement m : movements){
+            total += m.getAmount();
+        }
+        return total;
     }
 }
