@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -187,5 +188,45 @@ public class MovementDAOTest {
         
         // asserts
         assertEquals(amount, expenses, 0.1d);
+    }
+    
+    @Test
+    public void testGetExpensesTenMovements() throws DAOException {
+        // data for this test
+        double amount = 3.4d;
+        int times = 10;
+        
+        Concept concept = new ConceptDAO(session).find(1L);
+        Account account = new AccountDAO(session).find(1L);
+        Movement m = new Movement();
+        m.setDescription("TEST description");
+        m.setAmount(amount);
+        m.setFinalBalance(55d);
+        m.setMovementDate(new Date());
+        m.setAccount(account);
+        m.setConcept(concept);
+
+        // insert movement
+        MovementDAO dao = new MovementDAO(session);
+        List<Long> ids = new ArrayList<Long>();
+        for(int i = 0; i < times; i++){
+            long id = dao.insert(m);
+            ids.add(new Long(id));
+        }
+        
+        // get expenses of this month
+        int month = new GregorianCalendar().get(Calendar.MONTH) + 1;
+        Date start = DateUtils.getFirstDayOfMonth(month);
+        Date end = DateUtils.getLastDayOfMonth(month);
+        double expenses = dao.getExpenses(account, concept, start, end);
+        
+        // clean up
+        for(Long id : ids){
+            m.setIdMovement(id.longValue());
+            dao.delete(m);
+        }
+        
+        // asserts
+        assertEquals(amount * times, expenses, 0.1d);        
     }
 }
