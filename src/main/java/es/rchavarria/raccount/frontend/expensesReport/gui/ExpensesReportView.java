@@ -1,11 +1,13 @@
 package es.rchavarria.raccount.frontend.expensesReport.gui;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -34,17 +36,23 @@ public class ExpensesReportView extends JXPanel implements GuiView {
     }
 
     private void initComponents() {
-        setLayout(new MigLayout());
+        setLayout(new MigLayout(
+                "",
+                "[][]",
+                ""));
         
-        add(getTitleLabel(), "wrap");
-        add(getComboAccounts(), "wrap");
-        add(getDatePickerFrom());
-        add(getDatePickerTo(), "wrap");
-        add(getBtnOk());
+        add(getTitleLabel(), "span 2, wrap");
+        add(getComboAccounts(), "span 2, wrap");
+        add(getDatePickerFrom(), "align center");
+        add(getDatePickerTo(), "align center, wrap");
+        add(new JXLabel());
+        add(getBtnOk(), "align right");
     }
 
     private Component getTitleLabel() {
-        return new JXLabel("Expenses report");
+        JXLabel lbl = new JXLabel("Expenses report");
+        lbl.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+        return lbl;
     }
     
     private Component getComboAccounts() {
@@ -82,5 +90,14 @@ public class ExpensesReportView extends JXPanel implements GuiView {
 
     public Date getDateTo() {
         return dateTo.getDate();
+    }
+    
+    public static void main(String[] args) {
+        JFrame f = new JFrame();
+        f.setContentPane(new ExpensesReportView());
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        f.pack();
+        f.setVisible(true);
     }
 }
