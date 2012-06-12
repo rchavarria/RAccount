@@ -7,12 +7,12 @@ import javax.swing.UIManager;
 
 import org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel;
 
-import es.rchavarria.raccount.frontend.listMovements.gui.ListLastNMovementsController;
+import es.rchavarria.raccount.frontend.expensesReport.gui.ExpensesReportController;
 
 public class TotalExpensesReporterGUI {
     
     private JFrame buildGUI() {
-        ListLastNMovementsController controller = new ListLastNMovementsController();
+        ExpensesReportController controller = new ExpensesReportController();
         JPanel view = (JPanel) controller.getView();
         
         JFrame frm = new JFrame("List last N movements");
