@@ -13,9 +13,17 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<database.connectionString>jdbc\:derby\:db/TestRAccount;create\=true</database.connectionString>
 	</properties>
 	
 	<build>
+		<resources>
+			<resource>
+	        	<directory>src/main/resources</directory>
+	        	<filtering>true</filtering>
+	      	</resource>
+		</resources>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -107,4 +115,17 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>assembly</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<database.connectionString>jdbc\:derby\:db/RAccount;create\=true</database.connectionString>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>
