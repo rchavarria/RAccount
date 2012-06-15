@@ -12,13 +12,13 @@ public class ExpensesReportController {
 	private ExpensesReportView view;
 
 	public ExpensesReportController() {
-		this.view = new ExpensesReportView();
+		view = new ExpensesReportView();
 
 		load();
 	}
 
 	public GuiView getView() {
-		return this.view;
+		return view;
 	}
 
 	private void load() {
@@ -31,7 +31,7 @@ public class ExpensesReportController {
 			accountList = Collections.emptyList();
 		}
 
-		this.view.setAccounts(accountList);
-//		this.view.setNMovements("50");
+		view.setAccounts(accountList);
+//		view.setNMovements("50");
 	}
 }

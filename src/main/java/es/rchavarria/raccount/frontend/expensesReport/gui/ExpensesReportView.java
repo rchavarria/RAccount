@@ -31,7 +31,7 @@ public class ExpensesReportView extends JXPanel implements GuiView {
 
     public ExpensesReportView() {
         super();
-
+        
         initComponents();
     }
 
@@ -72,7 +72,9 @@ public class ExpensesReportView extends JXPanel implements GuiView {
     }
     
     private Component getBtnOk() {
-        return new JXButton("OK");
+        JXButton btnOk = new JXButton("OK");
+        btnOk.addActionListener(new ExpensesReportAcceptAction(this));
+        return btnOk;
     }
 
     public void setAccounts(final List<Account> accountList) {

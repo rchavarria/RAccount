@@ -2,6 +2,8 @@ package es.rchavarria.raccount.bussines;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import es.rchavarria.raccount.db.isession.TransactionalDBSession;
 import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.Concept;
 import es.rchavarria.raccount.model.DoubleMovement;
+import es.rchavarria.raccount.model.ExpensesByConcept;
 import es.rchavarria.raccount.model.Movement;
 
 /**
@@ -197,6 +200,27 @@ public class ServiceFacade {
             for(Concept concept : concepts){
                 double expense = mb.getMonthExpenses(month, account, concept);
                 expenses.put(concept, expense);
+            }
+
+        } finally {
+            if (session != null) { session.close(); }
+        }
+        
+        return expenses;
+    }
+
+    public List<ExpensesByConcept> getExpenses(Account account, Date dateFrom, Date dateTo) throws BussinessException, DAOException, SQLException, IOException {
+        List<Concept> concepts = getVisibleConceptList();
+        System.out.println("Hay " + concepts.size() + " conceptos");
+
+        List<ExpensesByConcept> expenses = new ArrayList<ExpensesByConcept>();
+        Session session = null;
+        try {
+            session = DBSession.getSession();
+            MovementBussiness mb = new MovementBussiness(session);
+            for(Concept concept : concepts){
+                double expense = mb.getExpenses(account, concept, dateFrom, dateTo);
+                expenses.add(new ExpensesByConcept(expense, concept));
             }
 
         } finally {

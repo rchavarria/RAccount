@@ -1,6 +1,7 @@
 package es.rchavarria.raccount.bussines;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -216,6 +217,22 @@ public class MovementBussiness {
             		     "account '" + account.getName() + "', " +
             		     "concept '" + concept.getName() + "' " +
             		     "during month '#" + month + "'";
+            throw new BussinessException(msg, e);
+        }
+    }
+
+    public double getExpenses(Account account, Concept concept, Date dateFrom, Date dateTo) throws BussinessException {
+        try {
+            MovementDAO dao = new MovementDAO(session);
+            return dao.getExpenses(account, concept, dateFrom, dateTo);
+            
+        } catch (DAOException e) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
+            String msg = "Error calculating expenses for " +
+                         "account '" + account.getName() + "', " +
+                         "concept '" + concept.getName() + "' " +
+                         "from '" + sdf.format(dateFrom) + "' " +
+                         "to '" + sdf.format(dateTo) + "'";
             throw new BussinessException(msg, e);
         }
     }
