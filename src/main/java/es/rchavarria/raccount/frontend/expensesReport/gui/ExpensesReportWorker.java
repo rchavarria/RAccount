@@ -3,6 +3,7 @@ package es.rchavarria.raccount.frontend.expensesReport.gui;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -15,11 +16,13 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
     private Account account;
     private Date dateFrom;
     private Date dateTo;
+    private ExpensesReportView view;
     
-    public ExpensesReportWorker(Account account, Date dateFrom, Date dateTo) {
+    public ExpensesReportWorker(Account account, Date dateFrom, Date dateTo, ExpensesReportView view) {
         this.account = account;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
+        this.view = view;
     }
 
     @Override
@@ -36,6 +39,9 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
             for(ExpensesByConcept expense : result){
                 System.out.println(expense.concept.getName() + " -> " + expense.expenses);
             }
+            
+            JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, view);
+            frame.dispose();
             
         } catch (Exception e) {
             e.printStackTrace();
