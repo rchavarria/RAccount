@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.util.Date;
 
 import javax.swing.AbstractAction;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 import es.rchavarria.raccount.model.Account;
 
@@ -24,7 +22,7 @@ public class ExpensesReportAcceptAction extends AbstractAction {
         Date dateFrom = view.getDateFrom();
         Date dateTo = view.getDateTo();
         
-        ExpensesReportWorker worker = new ExpensesReportWorker(account, dateFrom, dateTo);
+        ExpensesReportWorker worker = new ExpensesReportWorker(account, dateFrom, dateTo, view);
         worker.execute();
     }
 

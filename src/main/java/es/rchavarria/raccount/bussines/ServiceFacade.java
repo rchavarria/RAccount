@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import es.rchavarria.raccount.db.Session;
 import es.rchavarria.raccount.db.dao.AccountDAO;
@@ -183,30 +181,6 @@ public class ServiceFacade {
                 session.close();
             }
         }
-    }
-
-    public Map<Concept, Double> getMonthTotalExpenses(int month) throws BussinessException, DAOException, SQLException, IOException {
-        List<Concept> concepts = getVisibleConceptList();
-        System.out.println("Hay " + concepts.size() + " conceptos");
-
-        Account account = findAccount(1L);
-        System.out.println("Se buscarán movimientos para la cuenta '" + account.getName() + "'");
-
-        Map<Concept, Double> expenses = new HashMap<Concept, Double>();
-        Session session = null;
-        try {
-            session = DBSession.getSession();
-            MovementBussiness mb = new MovementBussiness(session);
-            for(Concept concept : concepts){
-                double expense = mb.getMonthExpenses(month, account, concept);
-                expenses.put(concept, expense);
-            }
-
-        } finally {
-            if (session != null) { session.close(); }
-        }
-        
-        return expenses;
     }
 
     public List<ExpensesByConcept> getExpenses(Account account, Date dateFrom, Date dateTo) throws BussinessException, DAOException, SQLException, IOException {
