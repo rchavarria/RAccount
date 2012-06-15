@@ -34,9 +34,9 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
     @Override
     protected void done() {
         try {
-            List<ExpensesByConcept> result = get();
+            List<ExpensesByConcept> expenses = get();
             
-            for(ExpensesByConcept expense : result){
+            for(ExpensesByConcept expense : expenses){
                 System.out.println(expense.concept.getName() + " -> " + expense.expenses);
             }
             
