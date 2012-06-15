@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import es.rchavarria.raccount.bussines.util.ConceptUtils;
-import es.rchavarria.raccount.bussines.util.DateUtils;
 import es.rchavarria.raccount.db.Session;
 import es.rchavarria.raccount.db.dao.AccountDAO;
 import es.rchavarria.raccount.db.dao.DAOException;
@@ -176,8 +175,13 @@ public class MovementBussiness {
 
 	/**
 	 * Inserta simplemente un movimiento, sin hacer ningun calculo
+	 * 
 	 * @param m
+	 *     moviviento a insertar
+	 *     
 	 * @return
+	 *     id asignado en la base de datos al movimiento insertado
+	 *     
 	 * @throws BussinessException
 	 */
 	public long insert(Movement m) throws BussinessException {
@@ -193,34 +197,19 @@ public class MovementBussiness {
 
 	/**
 	 * 
-	 * @param month
-	 *         mes del año para el que se quiere calcular los gastos (1=enero, 12=diciembre)
-	 * @param account
-	 *         cuenta para la que se calculan los gastos
-	 * @param concept
-	 *         concepto para el que se calculan los gastos
+     * @param account
+     *         cuenta para la que se calculan los gastos
+     * @param concept
+     *         concepto para el que se calculan los gastos
+	 * @param dateFrom
+	 *         fecha desde la que buscar gastos
+	 * @param dateTo
+	 *         fecha hasta la que buscar gastos
 	 * @return
-	 *         total de los gastos para una cuenta, concepto y mes dados.
+	 *         total de los gastos para una cuenta, concepto y periodo dados
 	 *         
 	 * @throws BussinessException
 	 */
-    public double getMonthExpenses(int month, Account account, Concept concept) throws BussinessException {
-        try {
-            MovementDAO dao = new MovementDAO(session);
-            Date start = DateUtils.getFirstDayOfMonth(month);
-            Date end = DateUtils.getLastDayOfMonth(month);
-            
-            return dao.getExpenses(account, concept, start, end);
-            
-        } catch (DAOException e) {
-            String msg = "Error calculating expenses for " +
-            		     "account '" + account.getName() + "', " +
-            		     "concept '" + concept.getName() + "' " +
-            		     "during month '#" + month + "'";
-            throw new BussinessException(msg, e);
-        }
-    }
-
     public double getExpenses(Account account, Concept concept, Date dateFrom, Date dateTo) throws BussinessException {
         try {
             MovementDAO dao = new MovementDAO(session);
