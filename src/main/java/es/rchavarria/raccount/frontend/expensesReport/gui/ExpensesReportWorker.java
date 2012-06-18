@@ -7,11 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import es.rchavarria.raccount.bussines.ServiceFacade;
+import es.rchavarria.raccount.frontend.dataCompleter.gui.EditDoubleMovementController;
 import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.ExpensesByConcept;
 
 public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, Void> {
+
+    private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
 
     private Account account;
     private Date dateFrom;
@@ -37,14 +43,14 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
             List<ExpensesByConcept> expenses = get();
             
             for(ExpensesByConcept expense : expenses){
-                System.out.println(expense.concept.getName() + " -> " + expense.expenses);
+                log.info(expense.concept.getName() + " -> " + expense.expenses);
             }
             
             JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, view);
             frame.dispose();
             
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error showing expenses report result", e);
         }
     }
 }

@@ -10,6 +10,9 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import es.rchavarria.raccount.bussines.ServiceFacade;
 import es.rchavarria.raccount.frontend.gui.controller.DialogableController;
 import es.rchavarria.raccount.model.Account;
@@ -18,6 +21,8 @@ import es.rchavarria.raccount.model.DoubleMovement;
 
 public class EditDoubleMovementController implements DialogableController<DoubleMovement> {
 
+    private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
+    
     private DoubleMovement dm;
     private EditDoubleMovementView view;
     private SimpleDateFormat sdf;
@@ -92,7 +97,7 @@ public class EditDoubleMovementController implements DialogableController<Double
             conceptList = new ServiceFacade().getVisibleConceptList();
             accountList = new ServiceFacade().getAccountabelAccountList();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("Error while loading concepts or accounts", e);
             conceptList = Collections.emptyList();
             accountList = Collections.emptyList();
         }

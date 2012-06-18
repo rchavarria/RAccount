@@ -6,11 +6,17 @@ import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import es.rchavarria.raccount.bussines.ServiceFacade;
+import es.rchavarria.raccount.frontend.dataCompleter.gui.EditDoubleMovementController;
 import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.Movement;
 
 public class BtnListNMovementsAction implements ActionListener {
+
+    private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
 
 	private ListLastNMovementsView view;
 	private NumberFormat nf;
@@ -34,9 +40,9 @@ public class BtnListNMovementsAction implements ActionListener {
 		List<Movement> movs = null;
 		try {
 			movs = new ServiceFacade().listLastNMovements(account, nMovements);
+			
 		} catch (Exception e1) {
-			// TODO mejorar esta gestion de excepcion
-			e1.printStackTrace();
+			log.info("Error getting movements", e1);
 			movs = Collections.emptyList();
 		}
 		this.view.setListMovements(movs);
