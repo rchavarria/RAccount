@@ -1,23 +1,20 @@
 package es.rchavarria.raccount.frontend.dataImporter;
 
-import static org.junit.Assert.assertEquals;
-
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import es.rchavarria.raccount.db.isession.DBSession;
 import es.rchavarria.raccount.model.Account;
 
 public class AccountImporterTest {
-    private static final Log log = LogFactory.getLog(AccountImporterTest.class);
+    private static final Logger log = LoggerFactory.getLogger(DBSession.class);
 
     @Before
     public void setUp() throws Exception {

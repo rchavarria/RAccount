@@ -4,13 +4,14 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.rchavarria.raccount.db.Session;
+import es.rchavarria.raccount.db.isession.DBSession;
 
 public class DeleteTables {
-    private static final Log log = LogFactory.getLog(DeleteTables.class);
+    private static final Logger log = LoggerFactory.getLogger(DBSession.class);
 	private Session session;
 
     public DeleteTables(Session session){

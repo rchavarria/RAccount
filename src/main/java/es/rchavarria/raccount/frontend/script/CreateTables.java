@@ -2,13 +2,14 @@ package es.rchavarria.raccount.frontend.script;
 
 import java.sql.SQLException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.rchavarria.raccount.db.Session;
+import es.rchavarria.raccount.db.isession.DBSession;
 
 public class CreateTables {
-    private static final Log log = LogFactory.getLog(CreateTables.class);
+    private static final Logger log = LoggerFactory.getLogger(DBSession.class);
 	private Session session;
 
     public CreateTables(Session session){

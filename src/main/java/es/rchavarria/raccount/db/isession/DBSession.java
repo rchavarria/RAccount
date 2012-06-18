@@ -8,14 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.rchavarria.raccount.db.DBConfig;
 import es.rchavarria.raccount.db.Session;
 
 public class DBSession implements Session {
-	private static final Log log = LogFactory.getLog(DBSession.class);
+	private static final Logger log = LoggerFactory.getLogger(DBSession.class);
 	private static Session session;
 
 	private Connection conn;
