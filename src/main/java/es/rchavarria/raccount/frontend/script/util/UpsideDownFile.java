@@ -9,12 +9,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import es.rchavarria.raccount.frontend.dataCompleter.gui.EditDoubleMovementController;
+
 /**
  * Invierte las lineas de un fichero de texto
  * 
  * @author RChavarria
  */
 public class UpsideDownFile {
+
+    private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
 
 	private String filePath;
 
@@ -59,7 +66,7 @@ public class UpsideDownFile {
 			fw.close();
 		}
 		
-		System.out.println("File '"+filePath+"' converted to '"+newFilePath+"'");
+		log.info("File '" + filePath + "' converted to '" + newFilePath + "'");
 	}
 	
 	/**

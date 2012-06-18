@@ -13,8 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import es.rchavarria.raccount.bussines.BussinessException;
 import es.rchavarria.raccount.bussines.ServiceFacade;
+import es.rchavarria.raccount.frontend.dataCompleter.gui.EditDoubleMovementController;
 import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.Concept;
 import es.rchavarria.raccount.model.Movement;
@@ -31,6 +35,8 @@ import es.rchavarria.raccount.model.Movement;
  * @author rchavarria
  */
 public class AccessMovementImporter {
+
+    private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
 
 	private String file;
 	private SimpleDateFormat sdf;
@@ -55,7 +61,7 @@ public class AccessMovementImporter {
 
 			String line = br.readLine(); // primera fila == cabecera
 			while ((line = br.readLine()) != null) {
-			    System.out.println("gonna parsing: '" + line + "'");
+			    log.info("gonna parsing: '" + line + "'");
 				String[] tokens = line.split(";");
 				
 				Movement m = new Movement();

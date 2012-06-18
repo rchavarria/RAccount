@@ -77,13 +77,13 @@ public class EditDoubleMovementController implements DialogableController<Double
         try {
             sdf.parse(view.getMovementDate());
         } catch (ParseException e) {
-            System.out.println("Date format is wrong: " + view.getMovementDate());
+            log.info("Date format is wrong: " + view.getMovementDate());
             return false;
         }
         try {
             nf.parse(view.getAmount());
         } catch (Exception e) {
-            System.out.println("Some number is wrong");
+            log.info("Some number is wrong");
             return false;
         }
 

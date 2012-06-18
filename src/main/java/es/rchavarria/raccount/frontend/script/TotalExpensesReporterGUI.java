@@ -6,11 +6,16 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import es.rchavarria.raccount.frontend.dataCompleter.gui.EditDoubleMovementController;
 import es.rchavarria.raccount.frontend.expensesReport.gui.ExpensesReportController;
 
 public class TotalExpensesReporterGUI {
     
+    private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
+
     private JFrame buildGUI() {
         ExpensesReportController controller = new ExpensesReportController();
         JPanel view = (JPanel) controller.getView();
@@ -34,7 +39,7 @@ public class TotalExpensesReporterGUI {
 	            try {
 	                UIManager.setLookAndFeel(new SubstanceBusinessLookAndFeel());
 	            } catch (Exception e) {
-	                System.out.println("Substance look and feel failed to initialize");
+	                log.error("Substance look and feel failed to initialize");
 	            }
 	            
 	            new TotalExpensesReporterGUI().buildGUI().setVisible(true);

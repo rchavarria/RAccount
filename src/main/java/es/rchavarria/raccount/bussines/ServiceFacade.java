@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import es.rchavarria.raccount.db.Session;
 import es.rchavarria.raccount.db.dao.AccountDAO;
 import es.rchavarria.raccount.db.dao.ConceptDAO;
@@ -13,6 +16,7 @@ import es.rchavarria.raccount.db.dao.DAOException;
 import es.rchavarria.raccount.db.dao.MovementDAO;
 import es.rchavarria.raccount.db.isession.DBSession;
 import es.rchavarria.raccount.db.isession.TransactionalDBSession;
+import es.rchavarria.raccount.frontend.dataCompleter.gui.EditDoubleMovementController;
 import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.Concept;
 import es.rchavarria.raccount.model.DoubleMovement;
@@ -25,6 +29,8 @@ import es.rchavarria.raccount.model.Movement;
  * @author RChavarria
  */
 public class ServiceFacade {
+
+    private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
 
     public List<Account> getAccountabelAccountList() throws SQLException, DAOException, IOException {
         Session session = null;
@@ -185,7 +191,7 @@ public class ServiceFacade {
 
     public List<ExpensesByConcept> getExpenses(Account account, Date dateFrom, Date dateTo) throws BussinessException, DAOException, SQLException, IOException {
         List<Concept> concepts = getVisibleConceptList();
-        System.out.println("Hay " + concepts.size() + " conceptos");
+        log.info("Hay " + concepts.size() + " conceptos");
 
         List<ExpensesByConcept> expenses = new ArrayList<ExpensesByConcept>();
         Session session = null;
