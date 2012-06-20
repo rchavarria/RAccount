@@ -1,5 +1,6 @@
 package es.rchavarria.raccount.frontend.expensesReport.gui;
 
+import java.awt.Container;
 import java.util.Date;
 import java.util.List;
 
@@ -46,8 +47,11 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
                 log.info(expense.concept.getName() + " -> " + expense.expenses);
             }
             
+            ExpensesReportResultController controller = new ExpensesReportResultController();
+            controller.load(expenses);
+            
             JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, view);
-            frame.dispose();
+            frame.setContentPane((Container) controller.getView());
             
         } catch (Exception e) {
             log.error("Error showing expenses report result", e);
