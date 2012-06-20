@@ -1,11 +1,10 @@
 package es.rchavarria.raccount.frontend.expensesReport.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-
-import net.miginfocom.swing.MigLayout;
 
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTable;
@@ -26,12 +25,9 @@ public class ExpensesReportResultView extends JXPanel implements GuiView {
     }
 
     private void initComponents() {
-        setLayout(new MigLayout(
-                "",
-                "",
-                ""));
+        setLayout(new BorderLayout());
         
-        add(getTable());
+        add(getTable(), BorderLayout.CENTER);
     }
 
     private Component getTable() {

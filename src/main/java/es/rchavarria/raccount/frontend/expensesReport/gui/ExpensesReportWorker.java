@@ -52,6 +52,8 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
             
             JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, view);
             frame.setContentPane((Container) controller.getView());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
             
         } catch (Exception e) {
             log.error("Error showing expenses report result", e);
