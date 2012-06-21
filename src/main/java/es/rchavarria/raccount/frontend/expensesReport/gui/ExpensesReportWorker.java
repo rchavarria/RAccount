@@ -1,6 +1,7 @@
 package es.rchavarria.raccount.frontend.expensesReport.gui;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
             
             ExpensesReportResultController controller = new ExpensesReportResultController();
             ResultFormData data = new ResultFormData(account, dateFrom, dateTo, expenses);
-            controller.load(expenses);
+            controller.load(data);
             
             JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, view);
             frame.setContentPane((Container) controller.getView());
