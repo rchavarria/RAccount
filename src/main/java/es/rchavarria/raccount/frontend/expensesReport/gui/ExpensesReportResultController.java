@@ -24,7 +24,7 @@ public class ExpensesReportResultController {
 	}
 
 	public void load(List<ExpensesByConcept> expenses) {
-	    log.info("loading %s expenses", expenses.size());
+	    log.info("loading {} expenses", expenses.size());
 	    
 		view.setTableModel(new ExpensesReportResultTableModel(expenses));
 	}
