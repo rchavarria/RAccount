@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import es.rchavarria.raccount.bussines.ServiceFacade;
 import es.rchavarria.raccount.frontend.dataCompleter.gui.EditDoubleMovementController;
+import es.rchavarria.raccount.frontend.expensesReport.data.ResultFormData;
 import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.ExpensesByConcept;
 
@@ -48,6 +49,7 @@ public class ExpensesReportWorker extends SwingWorker<List<ExpensesByConcept>, V
             }
             
             ExpensesReportResultController controller = new ExpensesReportResultController();
+            ResultFormData data = new ResultFormData(account, dateFrom, dateTo, expenses);
             controller.load(expenses);
             
             JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, view);
