@@ -28,19 +28,9 @@ public class ExpensesReportResultController {
 	public void load(ResultFormData data) {
 	    log.info("loading {} expenses", data.expenses.size());
 	    
-	    view.setTitle(buildViewTitle(data));
+	    view.setAccountName(data.account.getName());
+	    view.setDateFromName(sdf.format(data.dateFrom));
+	    view.setDateToName(sdf.format(data.dateTo));
 		view.setTableModel(new ExpensesReportResultTableModel(data.expenses));
 	}
-
-    private String buildViewTitle(ResultFormData data) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Expenses calculated for account '")
-               .append(data.account.getName())
-               .append("' from '")
-               .append(sdf.format(data.dateFrom))
-               .append("' to '")
-               .append(sdf.format(data.dateTo))
-               .append("'");
-        return builder.toString();
-    }
 }
