@@ -19,8 +19,11 @@ import es.rchavarria.raccount.frontend.expensesReport.models.ExpensesReportResul
 import es.rchavarria.raccount.frontend.gui.view.GuiView;
 
 public class ExpensesReportResultView extends JXPanel implements GuiView {
-
+    
     private static final long serialVersionUID = 6989676921321246246L;
+
+    private static final Font TITLE_FONT = new Font("Arial", Font.BOLD, 24);
+    private static final Font DATA_FONT = new Font("Arial", Font.BOLD, 14);
     
     private JXTable table;
     private JXLabel lblTitle;
@@ -56,7 +59,7 @@ public class ExpensesReportResultView extends JXPanel implements GuiView {
 
     private Component getTitle() {
         lblTitle = new JXLabel("Expenses report");
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 24));
+        lblTitle.setFont(TITLE_FONT);
         return lblTitle;
     }
     
@@ -69,6 +72,7 @@ public class ExpensesReportResultView extends JXPanel implements GuiView {
     
     private Component getAccountName() {
         lblAccount = new JXLabel("account");
+        lblAccount.setFont(DATA_FONT);
         return lblAccount;
     }
     
@@ -81,6 +85,7 @@ public class ExpensesReportResultView extends JXPanel implements GuiView {
     
     private Component getDateFromName() {
         lblDateFrom = new JXLabel("date from");
+        lblDateFrom.setFont(DATA_FONT);
         return lblDateFrom;
     }
 
@@ -93,6 +98,7 @@ public class ExpensesReportResultView extends JXPanel implements GuiView {
     
     private Component getDateToName() {
         lblDateTo = new JXLabel("date to");
+        lblDateTo.setFont(DATA_FONT);
         return lblDateTo;
     }
     
