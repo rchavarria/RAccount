@@ -27,7 +27,7 @@ public class ConceptEditorManager {
 	
 	public void startConceptEdit() throws DAOException, SQLException, IOException, ParseException, EditException, BussinessException{
 		System.out.println("Retrieving concept list:");
-		List<Concept> concepts = new ServiceFacade().getVisibleConceptList();
+		List<Concept> concepts = new ServiceFacade().getConceptList();
 		for(int i = 0; i < concepts.size(); i++){
 			Concept c = concepts.get(i);
 			String msg = "["+(i+1)+"] " + c.getName();

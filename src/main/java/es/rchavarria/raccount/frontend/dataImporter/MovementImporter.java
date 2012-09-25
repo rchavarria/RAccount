@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class MovementImporter {
                 
                 Movement m = new Movement();
                 m.setMovementDate(sdf.parse(tokens[1]));
-                Double dblValue = NumberFormat.getCurrencyInstance().parse(tokens[2]).doubleValue();
+                Double dblValue = parseDoulbeValue(tokens[2]);
                 m.setAmount(dblValue);
                 Long lgValue = NumberFormat.getInstance().parse(tokens[3]).longValue();
                 Concept conc = new ConceptDAO(session).find(lgValue);
@@ -66,7 +67,7 @@ public class MovementImporter {
                 Account a = new AccountDAO(session).find(lgValue);
                 m.setAccount(a);
                 if(tokens.length > 6){
-                    dblValue = NumberFormat.getCurrencyInstance().parse(tokens[6]).doubleValue();
+                    dblValue = parseDoulbeValue(tokens[6]);
                     m.setFinalBalance(dblValue);
                 }
                 
@@ -91,5 +92,10 @@ public class MovementImporter {
         }
 
         return movements;
+    }
+
+    private double parseDoulbeValue(String strValue) throws ParseException {
+        strValue = strValue.substring(0, strValue.indexOf(" "));
+        return NumberFormat.getInstance().parse(strValue).doubleValue();
     }
 }

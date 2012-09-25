@@ -32,7 +32,7 @@ public class ServiceFacade {
 
     private final static Logger log = LoggerFactory.getLogger(EditDoubleMovementController.class);
 
-    public List<Account> getAccountabelAccountList() throws SQLException, DAOException, IOException {
+    public List<Account> getAccountList() throws SQLException, DAOException, IOException {
         Session session = null;
         try {
             session = DBSession.getSession();
@@ -50,6 +50,19 @@ public class ServiceFacade {
         try {
             session = DBSession.getSession();
             return new ConceptDAO(session).listAllVisible();
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public List<Concept> getConceptList() throws DAOException, SQLException, IOException {
+        Session session = null;
+        try {
+            session = DBSession.getSession();
+            return new ConceptDAO(session).listAll();
 
         } finally {
             if (session != null) {

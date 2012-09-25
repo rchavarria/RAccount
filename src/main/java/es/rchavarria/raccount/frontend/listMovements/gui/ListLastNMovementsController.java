@@ -30,7 +30,7 @@ public class ListLastNMovementsController {
 	private void load() {
 		List<Account> accountList = null;
 		try {
-			accountList = new ServiceFacade().getAccountabelAccountList();
+			accountList = new ServiceFacade().getAccountList();
 			
 		} catch (Exception e) {
 			log.info("Error getting account list", e);

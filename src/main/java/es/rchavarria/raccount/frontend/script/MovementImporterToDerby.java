@@ -28,7 +28,7 @@ public class MovementImporterToDerby {
 
 		log.info("Movements before importation: " + facade.getMovementList().size());
 		for (Movement m : movements) {
-			facade.insertMovement(m);
+		    facade.insertMovement(m);
 		}
 		log.info("Movements after importation: " + facade.getMovementList().size());
 	}

@@ -27,7 +27,7 @@ public class AccountEditorManager {
 	
 	public void startConceptEdit() throws DAOException, SQLException, IOException, ParseException, EditException, BussinessException{
 		System.out.println("Retrieving account list:");
-		List<Account> accounts = new ServiceFacade().getAccountabelAccountList();
+		List<Account> accounts = new ServiceFacade().getAccountList();
 		for(int i = 0; i < accounts.size(); i++){
 			Account c = accounts.get(i);
 			String msg = "["+(i+1)+"] " + c.getName();

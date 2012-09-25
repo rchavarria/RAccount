@@ -25,10 +25,10 @@ public class AccountImporterToDerby {
 		log.info("Accounts imported: " + concepts.size());
 		ServiceFacade facade = new ServiceFacade();
 
-		log.info("Accounts before importation: " + facade.getAccountabelAccountList().size());
+		log.info("Accounts before importation: " + facade.getAccountList().size());
 		for (Account a : concepts) {
 			facade.insertAccount(a);
 		}
-		log.info("Accounts after importation: " + facade.getAccountabelAccountList().size());
+		log.info("Accounts after importation: " + facade.getAccountList().size());
 	}
 }

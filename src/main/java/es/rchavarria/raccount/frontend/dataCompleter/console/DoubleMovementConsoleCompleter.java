@@ -108,7 +108,7 @@ public class DoubleMovementConsoleCompleter implements Completer<DoubleMovement>
 	private void completeAccount(final DoubleMovement element, final boolean boolFrom) throws CompleterException {
 		List<Account> accounts = null;
 		try {
-			accounts = new ServiceFacade().getAccountabelAccountList();
+			accounts = new ServiceFacade().getAccountList();
 			ps.println("Accounts list:");
 			for (int i = 1; i <= accounts.size(); i++) {
 				Account a = accounts.get(i - 1);

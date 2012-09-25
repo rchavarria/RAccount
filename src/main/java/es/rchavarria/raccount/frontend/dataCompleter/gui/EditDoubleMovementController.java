@@ -95,7 +95,7 @@ public class EditDoubleMovementController implements DialogableController<Double
         List<Account> accountList = null;
         try {
             conceptList = new ServiceFacade().getVisibleConceptList();
-            accountList = new ServiceFacade().getAccountabelAccountList();
+            accountList = new ServiceFacade().getAccountList();
         } catch (Exception e) {
             log.info("Error while loading concepts or accounts", e);
             conceptList = Collections.emptyList();

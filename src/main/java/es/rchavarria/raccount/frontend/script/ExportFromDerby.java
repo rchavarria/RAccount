@@ -93,7 +93,7 @@ public class ExportFromDerby {
 	private static void exportAccounts(final String path) throws Exception {
 		String filePath = path + File.separator + "accounts.csv";
 		System.out.println("Exporting accounts to file: " + filePath);
-		List<Account> concepts = new ServiceFacade().getAccountabelAccountList();
+		List<Account> concepts = new ServiceFacade().getAccountList();
 
 		FileOutputStream fos = null;
 		try {
