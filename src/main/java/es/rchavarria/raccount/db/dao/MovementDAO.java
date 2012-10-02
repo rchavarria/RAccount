@@ -59,7 +59,8 @@ public class MovementDAO {
 
         String sql = "UPDATE Movement SET ";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sql += Movement.DESCRIPTION + "='" + movement.getDescription() + "', ";
+        String description = new SQLValuesFormatter().cleanUpDangerousCharacters(movement.getDescription());
+        sql += Movement.DESCRIPTION + "='" + description + "', ";
         sql += Movement.MOVEMENT_DATE + "='" + sdf.format(movement.getMovementDate()) + "', ";
         sql += Movement.AMOUNT + "=" + movement.getAmount() + ", ";
         sql += Movement.FINAL_BALANCE + "=" + movement.getFinalBalance() + ", ";
@@ -87,13 +88,7 @@ public class MovementDAO {
                        + Movement.FINAL_BALANCE + ", " 
                        + Movement.ID_ACCOUNT + ", " 
                        + Movement.ID_CONCEPT;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String values = "'" + movement.getDescription() + "', " 
-                      + "'" + sdf.format(movement.getMovementDate()) + "', "
-                      + movement.getAmount() + ", " 
-                      + movement.getFinalBalance() + ", "
-                      + movement.getAccount().getIdAccount() + ", " 
-                      + movement.getConcept().getIdConcept();
+        String values = new SQLValuesFormatter().format(movement, movement.getAccount());
         String sql = "INSERT INTO Movement (" + names + ") VALUES (" + values + ")";
 
         try {

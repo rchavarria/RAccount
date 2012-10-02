@@ -2,18 +2,18 @@ package es.rchavarria.raccount.db.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 import es.rchavarria.raccount.db.Session;
-import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.DoubleMovement;
 
 public class DoubleMovementDAO {
     
     private Session session;
+    private SQLValuesFormatter formatter;
 
     public DoubleMovementDAO(Session session){
         this.session = session;
+        formatter = new SQLValuesFormatter();
     }
 
     private void closeResultSet(ResultSet rs) {
@@ -33,11 +33,11 @@ public class DoubleMovementDAO {
         String sql = null;
         
         try {
-        	String valuesFrom = formatValues(movement, movement.getAccount());
+        	String valuesFrom = formatter.format(movement, movement.getAccount());
         	sql = "INSERT INTO Movement ("+names+") VALUES ("+valuesFrom+")";
             session.sqlExecute(sql);
 
-            String valuesTo = formatValues(movement, movement.getAccountTo());
+            String valuesTo = formatter.format(movement, movement.getAccountTo());
         	sql = "INSERT INTO Movement ("+names+") VALUES ("+valuesTo+")";
             session.sqlExecute(sql);
             
@@ -71,15 +71,4 @@ public class DoubleMovementDAO {
             
         return -1; //throw exception ?
     }
-
-	private String formatValues(DoubleMovement movement, Account account) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String values = "'" + movement.getDescription() + "', " +
-                        "'" + sdf.format(movement.getMovementDate()) + "', " +
-                        movement.getAmount() + ", " +
-                        movement.getFinalBalance() + ", " +
-                        account.getIdAccount() + ", " +
-                        movement.getConcept().getIdConcept();
-		return values;
-	}
 }    

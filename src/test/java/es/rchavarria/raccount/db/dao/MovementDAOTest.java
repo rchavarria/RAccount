@@ -89,6 +89,23 @@ public class MovementDAOTest {
         assertTrue(id != -1);
         assertEquals(count, 1);
     }
+    
+    @Test
+    public void testInsertDescriptionContainsSingleQuoutes() throws DAOException {
+        Movement m = createMovement();
+        m.setDescription("Kiddy's class");
+        
+        MovementDAO dao = new MovementDAO(session);
+        long id = dao.insert(m);
+        m.setIdMovement(id);
+        
+        int count = dao.count();
+        
+        dao.delete(m);
+        
+        assertTrue(id != -1);
+        assertEquals(count, 1);
+    }
 
     @Test
     public void testListAll() throws Exception {

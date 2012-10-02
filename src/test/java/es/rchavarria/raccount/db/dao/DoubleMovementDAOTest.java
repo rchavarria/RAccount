@@ -51,4 +51,28 @@ public class DoubleMovementDAOTest {
         int nEndMov = mdao.count();
         Assert.assertEquals(nMovements, nEndMov);
     }
+    
+    @Test
+    public void testInsertDescriptionContainsSingleQuoutes() throws Exception {
+        DoubleMovement m = new DoubleMovementTestFactory(session).create();
+        m.setDescription("Kiddy's class");
+        
+        MovementDAO mdao = new MovementDAO(session);
+        DoubleMovementDAO dao = new DoubleMovementDAO(session);
+        int nMovements = mdao.count();
+        
+        long id = dao.insert(m);
+        Assert.assertTrue(id != -1);
+        int nMovPlus2 = mdao.count();
+        Assert.assertEquals(nMovements, nMovPlus2 - 2L);
+        
+        Movement mLast = mdao.find(id);
+        Assert.assertNotNull(mLast);
+        mdao.delete(mLast);
+        Movement mFirst = mdao.find(id - 1);
+        Assert.assertNotNull(mFirst);
+        mdao.delete(mFirst);
+        int nEndMov = mdao.count();
+        Assert.assertEquals(nMovements, nEndMov);
+    }
 }
