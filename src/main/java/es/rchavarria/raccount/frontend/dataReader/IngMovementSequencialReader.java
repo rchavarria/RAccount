@@ -27,7 +27,7 @@ public class IngMovementSequencialReader implements SequencialReader<DoubleMovem
     public IngMovementSequencialReader(InputStream is){
     	isr = new InputStreamReader(is);
         reader = new BufferedReader(isr);
-        sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf = new SimpleDateFormat("dd/MM/yyyy");
         nf = NumberFormat.getNumberInstance(new Locale("es"));//se importara con los numeros en formato español
     }
 
