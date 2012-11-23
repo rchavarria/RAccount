@@ -18,6 +18,7 @@ import es.rchavarria.raccount.frontend.gui.controller.DialogableController;
 import es.rchavarria.raccount.model.Account;
 import es.rchavarria.raccount.model.Concept;
 import es.rchavarria.raccount.model.DoubleMovement;
+import es.rchavarria.raccount.model.comparator.ConceptNameComparator;
 
 public class EditDoubleMovementController implements DialogableController<DoubleMovement> {
 
@@ -95,6 +96,7 @@ public class EditDoubleMovementController implements DialogableController<Double
         List<Account> accountList = null;
         try {
             conceptList = new ServiceFacade().getVisibleConceptList();
+            Collections.sort(conceptList, new ConceptNameComparator());
             accountList = new ServiceFacade().getAccountList();
         } catch (Exception e) {
             log.info("Error while loading concepts or accounts", e);
